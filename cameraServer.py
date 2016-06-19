@@ -6,7 +6,7 @@ camera = PiCamera()
 
 class HomeBotCamera(object):
     @cherrypy.expose
-    @tools.json_out()
+    @cherrypy.tools.json_out()
     def takePicture(self):
     	response = {}
     	stream = io.BytesIO()
