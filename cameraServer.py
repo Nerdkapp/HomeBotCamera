@@ -1,14 +1,14 @@
-import cv2
 import json
-from picamera.array import PiRGBArray
 from picamera import PiCamera
-from flask import Flask
+import cherrypy
 
 camera = PiCamera()
-app = Flask(__name__)
 
+class HelloWorld(object):
+    @cherrypy.expose
+    def index(self):
+    	camera.capture('image.jpg')
+        return "Hello world!"
 
-@app.route('/')
-def hello_world():
-	camera.capture('image.jpg')
-    return 'Hello, World!'
+if __name__ == '__main__':
+   cherrypy.quickstart(HelloWorld())
