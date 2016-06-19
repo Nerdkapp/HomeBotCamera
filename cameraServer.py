@@ -4,11 +4,14 @@ import cherrypy
 
 camera = PiCamera()
 
-class HelloWorld(object):
+class HomeBotCamera(object):
     @cherrypy.expose
-    def index(self):
-    	camera.capture('image.jpg')
-        return "Hello world!"
+    @tools.json_out()
+    def takePicture(self):
+    	response = {}
+    	stream = io.BytesIO()
+    	camera.capture(stream, 'jpeg')
+        return {"image" : stream.readall()}
 
 if __name__ == '__main__':
-   cherrypy.quickstart(HelloWorld())
+   cherrypy.quickstart(HomeBotCamera())
