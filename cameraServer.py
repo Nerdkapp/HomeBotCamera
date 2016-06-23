@@ -9,9 +9,9 @@ class HomeBotCamera(object):
     @cherrypy.expose
     @cherrypy.tools.json_out()
     def takePicture(self):
-    	fileName = str(uuid.uuid1()) + '.jpg';
-    	camera.capture('/home/pi/images/' + fileName)    	
+        fileName = str(uuid.uuid1()) + '.jpg';
+        camera.capture('/home/pi/images/' + fileName)
         return {"image" : "/static/" + fileName}
 
 if __name__ == '__main__':
-   cherrypy.quickstart(HomeBotCamera(), '/', "app.conf")	
+    cherrypy.quickstart(HomeBotCamera(), '/', "app.conf")
